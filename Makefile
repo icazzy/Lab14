@@ -2,7 +2,7 @@ AutomatedMakefile = am
 CC = g++
 
 FILES = TableDriver.o
-EXECUTABLE = SortedTable.exe
+EXECUTABLE = TableDriver.exe
 
 PROJECT_PATH = $(PROJECT_DIR)
 
@@ -18,7 +18,8 @@ all: Project
 Project: 		$(FILES)
 			$(LINK) $(EXECUTABLE) $(FILES) $(LIBS)
 
-SortedTable.o:		DoubleNode.h ListDoublyLinkedIterator.h SortedListDoublyLinked.h TableSortedList.h TableDriver.cpp
-			$(COMPILE) TableDriver.cpp
- 
+
+			
+TableDriver.o:			TableSortedList.h	TableDriver.cpp		SortedListDoublyLinked.h
+						$(COMPILE)		TableDriver.cpp
 

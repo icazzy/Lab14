@@ -2,6 +2,7 @@
 #define TABLESORTEDLIST_H
 
 #include "SortedListDoublyLinked.h"
+#include "ListDoublyLinkedIterator.h"
 
 template < class T >
 class TableSortedList
@@ -27,12 +28,64 @@ class TableSortedList
 //DO THIS
 //complete the implementation for TableSortedList
 
+template < class T >
+TableSortedList<T>::TableSortedList(int (*comp_item) (T* item_1, T* item_2), int (*comp_key) (String* key, T* item))
+{
+	sldl = new SortedListDoublyLinked<T>(comp_item, comp_key);
+}
 
 
+template < class T >
+TableSortedList<T>::~TableSortedList()
+{
+	delete sldl;
+}
 
 
+template < class T >
+bool TableSortedList<T>::tableIsEmpty()
+{
+	return sldl->isEmpty();
+}
 
 
+template < class T >
+int TableSortedList<T>::tableSize()
+{
+	return sldl->size();
+}
+
+
+template < class T >
+T* TableSortedList<T>::tableRetrieve(String* sk)
+{
+	return sldl->get(sk);
+}
+
+template < class T >
+void TableSortedList<T>::tableInsert(T* item)
+{
+	if(sldl->get(item->getKey()))
+		return;
+		
+	sldl->add(item);
+}
+
+
+template < class T >
+bool TableSortedList<T>::tableRemove(String* search_key)
+{
+	sldl->remove(search_key);
+
+}
+
+
+template < class T >
+ListDoublyLinkedIterator<T>* TableSortedList<T>::iterator()
+{
+	ListDoublyLinkedIterator<T>* iter = sldl->iterator();
+	return iter;
+}
 
 
 

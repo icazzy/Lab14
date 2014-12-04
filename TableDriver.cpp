@@ -2,6 +2,7 @@
 #include "ListArray.h"
 using CSC2110::ListArray;
 #include "ListArrayIterator.h"
+#include "ListDoublyLinkedIterator.h"
 using CSC2110::ListArrayIterator;
 #include "CD.h"
 using CSC2110::CD;
@@ -33,8 +34,47 @@ int main()
 
    //DO THIS
    //thoroughly test your table
+   ListArrayIterator<CD>* iter = cds->iterator();
+   while(iter->hasNext())
+   {
+      CD* cd = iter->next();
+      slt->tableInsert(cd);
+	  
+	  cd = slt->tableRetrieve(cd->getKey());
+	  cd->displayCD();
+   }
+   delete iter;
+   
+   ListArrayIterator<CD>* iterTest = cds->iterator();
+   
+   CD* cdTest = iterTest->next();
+   
+   cout << slt->tableSize() << endl;										//tests duplicate inserts
+   slt->tableInsert(cdTest);
+   cout << slt->tableSize() << endl;
+   
+   
+   
 
-
+	ListDoublyLinkedIterator<CD>* iters = slt->iterator();
+	
+	while(iters->hasNext())
+	{
+		CD* cd = iters->next();
+		
+		slt->tableRemove(cd->getKey());
+		bool remove = slt->tableRemove(cd->getKey());		//tests nonexistent removals
+		CD* retrieve = slt->tableRetrieve(cd->getKey());	//tests nonexistent retrievals
+		
+		if(remove == true)
+			cout << "false remove" << endl;
+		if(retrieve != NULL)
+			cout << "false retrieve" << endl;
+			
+		cout << slt->tableSize()<< endl;
+	}
+	delete iters;
+	
 
 
 
